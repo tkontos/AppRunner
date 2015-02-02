@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project InitialTargets="VerifyVariables" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+   <!-- Modify the Output and Intermediary directory -->
+   <PropertyGroup>
+      <OutDir>$(SolutionDir)Out\$(Configuration)\</OutDir>
+      <IntDir>$(SolutionDir)Out\$(Configuration)\$(TargetName)\</IntDir>
+      <TargetDir>$(OutDir)</TargetDir>
+   </PropertyGroup>
+   
+   <!--
+   Configure external library directories.
+   All the 'variables' that start with VC_ should be either entered as envir variables,
+   or entered here
+   -->
+
+   <!-- Uncomment the lines below to ovewrite the envir variables.
+   <PropertyGroup>
+      <VC_ROOT_DIR>D:\Resources\VsBuild</VC_ROOT_DIR>
+      <VC_BOOST_DIR>$(VC_ROOT_DIR)\Boost\boost_1_55_0</VC_BOOST_DIR>
+      <VC_WTL_DIR>$(VC_ROOT_DIR)\wtl\wtl90_4140</VC_WTL_DIR>
+   </PropertyGroup>
+   -->
+   
+   <!-- BOOST -->
+   <PropertyGroup>
+      <BoostIncl>$(VC_BOOST_DIR)\</BoostIncl>
+      <BoostLib>$(VC_BOOST_DIR)\x32</BoostLib>
+   </PropertyGroup>
+   
+   <!-- WTL -->
+   <PropertyGroup>
+      <WtlIncl>$(VC_WTL_DIR)\include\</WtlIncl>
+   </PropertyGroup>
+
+   <!-- Save include and lib paths before they are modified below -->
+   <PropertyGroup>
+      <OrigIncludePath Condition="'$(OrigIncludePath)' == ''">$(IncludePath)</OrigIncludePath>
+      <OrigLibraryPath Condition="'$(OrigLibraryPath)' == ''">$(LibraryPath)</OrigLibraryPath>
+   </PropertyGroup>
+
+   <!-- Modify Include and Lib directories -->
+   <PropertyGroup>
+      <IncludePath>$(WtlIncl);$(BoostIncl);$(IncludePath)</IncludePath>
+      <LibraryPath>$(BoostLib);$(LibraryPath)</LibraryPath>
+   </PropertyGroup>
+
+   <!-- Sanity checks -->
+   <Target Name="VerifyVariables">
+      <!-- Verify Boost is OK -->
+      <Error
+             Condition="'$(VC_BOOST_DIR)' == ''"
+             Text="Variable 'VC_BOOST_DIR' is missing."
+             />
+      <Error
+            Condition="!Exists($(VC_BOOST_DIR))"
+            Text="Variable 'VC_BOOST_DIR' points to an ivalid dir '$(VC_BOOST_DIR)'."
+            />
+
+      <!-- Verify WTL is OK -->
+      <Error
+             Condition="'$(VC_WTL_DIR)' == ''"
+             Text="Variable 'VC_WTL_DIR' is missing."
+             />
+      <Error
+            Condition="!Exists($(VC_WTL_DIR))"
+            Text="Variable 'VC_WTL_DIR' points to an ivalid dir '$(VC_WTL_DIR)'."
+            />
+   </Target>
+   
+</Project>

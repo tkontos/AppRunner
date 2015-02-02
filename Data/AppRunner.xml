@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppRunner>
+   <Config>
+      <Item name="RemoveMissing"      value="0" />
+   </Config>
+   
+   <!-- NOTE: Defines are case sensitive -->
+   <Defines computer="Posidon">
+      <Item name="Proj"               value="C:\_Proj" />
+      <Item name="Data"               value="C:\Data" />
+   </Defines>
+   <Defines>
+      <Item name="Program"            value="C:\Program Files (x86)" />
+      
+      <!-- Project Common -->
+      <Item name="Proj"               value="D:\_Proj" />
+      <Item name="Data"               value="D:\Data" />
+      
+      <!-- DarkStar -->
+      <Item name="DarkStar"           value="%Proj%\_Active\Chronotek\Darkstar"/>
+
+      <!--Holladay macros-->
+      <Item name="Holladay"           value="%Proj%\_Active\Holladay" />
+
+      <!-- Chronotek -->
+      <Item name="Chronotek"          value="%Proj%\_Active\Chronotek" />
+      <Item name="Malema"             value="%Proj%\_AuxProj\Malema" />
+
+      <!-- SysInternals -->
+      <Item name="SysInternals"       value="C:\Sys\WSCC\Sysinternals" />
+
+      <!-- Apps -->
+      <Item name="WinMerge"           value="%Program%\WinMerge\WinMergeU.exe" />
+      <Item name="VStudio2012"        value="%Program%\Microsoft Visual Studio 11.0\Common7\IDE\devenv.exe" />
+      <Item name="VStudio2013"        value="%Program%\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe" />
+
+      <!-- Other directories -->
+      <Item name="Skydrive"           value="C:\Users\Thanos\SkyDrive" />
+   </Defines>
+
+   <CommandPage name="DarkStar">
+      <Item name="Darkstar Folder->"                 cmd="%DarkStar%" />
+      <Item name="Darsktar Solution"                 cmd="%VStudio2013% %DarkStar%\DarkStar.sln"/>
+
+      <Separator name="TI Compilers"/>
+      <Item name="TI CCS 6.0"                        cmd="C:\TI\ccsv6\eclipse\ccstudio.exe" />
+      <Item name="TI CCS 3.0"                        cmd="C:\TI\CCS33\cc\bin\cc_app.exe" />
+   </CommandPage>
+
+   <CommandPage name="Chronotek">
+      <Item name="Pulse Folder->"                    cmd="%Chronotek%\Pulse"/>
+      <Item name="PulseLink"                         cmd="%Chronotek%\Pulse\Out\Debug\PulseLink.exe"/>
+      <Item name="PulseAuthorize"                    cmd="%Chronotek%\Pulse\Out\Release\PulseAuthPlus.exe"/>
+      <Item name="Chronotek Solution"                cmd="%VStudio2013% %Chronotek%\Pulse\Pulse.sln"/>
+
+      <Separator name="Malema" />
+      <Item name="Malema Folder->"                   cmd="%Malema%\Pulse"/>
+      <Item name="WinMerge Chronotek -> Malema"      cmd="%WinMerge% -r %Chronotek%\Pulse %Malema%\Pulse"/>
+      <Item name="Malema Solution"                   cmd="%VStudio2013% %Malema%\Pulse\Malema.Pulse.git.sln"/>
+
+      <Separator />
+      <Item name="TI CCS 3.0"                        cmd="C:\TI\CCS33\cc\bin\cc_app.exe" />
+   </CommandPage>
+
+   <CommandPage name="HicSoapPro">
+      <Separator name="Current Version"/>
+      <Item name="HicPro Folder->"                   cmd="%Holladay%\HicPro"/>
+      <Item name="HicPro Solution"                   cmd="%VStudio2013% %Holladay%\HicSoapPro.sln"/>
+      <Item name="HicPro"                            cmd="%Holladay%\HicPro\Out\Debug\HicSoapPro.exe"/>
+
+      <Separator name="Setup, Data, etc"/>
+      <Item name="Hic Bugs Folder"                   cmd="%Data%\Holladay" />
+      <Item name="InnoSetup Install"                 cmd="%Holladay%\HicPro\Setup\HicProSetup.iss" />
+      <Item name="Release Notes"                     cmd="%Holladay%\HicPro\Setup\ReleaseNotes.rtf" />
+      <Item name="HicUsersDb"                        cmd="%Holladay%\HicPro\Out\Release\HicUsersDb.exe"/>
+
+      <Separator name="Previous Versions"/>
+      <Item name="HicPro V2014.0607"                 cmd="%Proj%\Release\HicPro\HicPro_2014_0607\Out\Release\HicSoapPro.exe"/>
+      <Item name="HicPro V2014.0926"                 cmd="%Proj%\Release\HicPro\HicPro_2014_0926\Out\Release\HicSoapPro.exe"/>
+      <Item name="HicPro V2014.1113"                 cmd="%Proj%\Release\HicPro\HicPro_2014_1113\Out\Release\HicSoapPro.exe"/>
+   </CommandPage>
+
+   <CommandPage name="Util">
+      <Item name="FontPicker"                        cmd="C:\Sys\Util\FontPicker.exe" />
+      <Item name="ResourceOrganizer"                 cmd="C:\Sys\Util\ResOrg\ResOrg.exe" />
+      <Item name="TraceWin"                          cmd="C:\Sys\Util\TraceWin.exe" />
+      <Item name="ZoomPlus"                          cmd="C:\Sys\Util\ZoomPlus\ZoomPlus.exe" />
+      <Item name="FileZilla"                         cmd="C:\Sys\FileZilla\filezilla.exe" />
+      <Item name="Env Editor"                        cmd="C:\Sys\Util\rapidee64.exe" />
+
+      <Separator/>
+      <Item name="VStudio2013"                       cmd="%VStudio2013%" />
+      <Item name="VStudio2012"                       cmd="%VStudio2012%" />
+      <Item name="WinMerge"                          cmd="%Program%\WinMerge\WinMergeU.exe" />
+   </CommandPage>
+
+   <CommandPage name="SysInternals">
+      <Item name="Process Explorer"                  cmd="%SysInternals%\procexp.exe" />
+      <Item name="AutoRuns"                          cmd="%SysInternals%\autoruns.exe" />
+      <Item name="VMMap"                             cmd="%SysInternals%\vmmap.exe" />
+      <Item name="ZoomIt"                            cmd="%SysInternals%\ZoomIt.exe" />
+   </CommandPage>
+</AppRunner>
